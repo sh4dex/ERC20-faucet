@@ -1,66 +1,54 @@
-## Foundry
+# ERC20 Token Faucet
 
-**Foundry is a blazing fast, portable and modular toolkit for Ethereum application development written in Rust.**
+**Time-driven ERC20 token faucet implementation.**
 
-Foundry consists of:
+# Author
 
-- **Forge**: Ethereum testing framework (like Truffle, Hardhat and DappTools).
-- **Cast**: Swiss army knife for interacting with EVM smart contracts, sending transactions and getting chain data.
-- **Anvil**: Local Ethereum node, akin to Ganache, Hardhat Network.
-- **Chisel**: Fast, utilitarian, and verbose solidity REPL.
+**Thomas Sorza**
+Solidity / Web3 Developer
 
-## Documentation
+# Overview
 
-https://book.getfoundry.sh/
+This project implements a simple **ERC20 token and a faucet smart contract** that allows users to claim tokens periodically with a cooldown and a maximum number of claims. The project was built using **Foundry** and **OpenZeppelin** as part of a Solidity learning and development workflow.
+---
 
-## Usage
+The repository contains two main smart contracts:
 
-### Build
+### THXToken.sol
 
-```shell
-$ forge build
-```
+An **ERC20 token implementation** built on top of OpenZeppelin.
 
-### Test
 
-```shell
-$ forge test
-```
+### TokenFaucet.sol
 
-### Format
+A **time-based faucet contract** that distributes ERC20 tokens.
 
-```shell
-$ forge fmt
-```
+./img/TokenFaucetClass.png
+---
 
-### Gas Snapshots
+# Contract Interaction 
+./img/executionFlow.png
+---
 
-```shell
-$ forge snapshot
-```
+# Deployment
 
-### Anvil
+Deployment script:
 
-```shell
-$ anvil
-```
+script/DeployTHXToken.s.sol
 
-### Deploy
+## 📜 Deployed Contracts
 
-```shell
-$ forge script script/Counter.s.sol:CounterScript --rpc-url <your_rpc_url> --private-key <your_private_key>
-```
+### Arbitrum Sepolia Testnet
 
-### Cast
+| Contract | Address |
+|----------|---------|
+| `TokenFaucet` | [`0x88E6277b1CfA68D47EB09d08F232d42A98A30942`](https://sepolia.arbiscan.io/address/0x88E6277b1CfA68D47EB09d08F232d42A98A30942) |
 
-```shell
-$ cast <subcommand>
-```
+> 🔗 **Explorer:** [View on Arbiscan Sepolia](https://sepolia.arbiscan.io/address/0x88E6277b1CfA68D47EB09d08F232d42A98A30942)
 
-### Help
+---
 
-```shell
-$ forge --help
-$ anvil --help
-$ cast --help
-```
+# Testing
+
+Tests are will be written in foundry (Not yet implemented).
+
