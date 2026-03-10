@@ -2,43 +2,43 @@
 
 **Time-driven ERC20 token faucet implementation.**
 
-# Author
-
-**Thomas Sorza**
-Solidity / Web3 Developer
-
-# Overview
-
-This project implements a simple **ERC20 token and a faucet smart contract** that allows users to claim tokens periodically with a cooldown and a maximum number of claims. The project was built using **Foundry** and **OpenZeppelin** as part of a Solidity learning and development workflow.
 ---
 
-The repository contains two main smart contracts:
+## 👤 Author
 
-### THXToken.sol
+**Thomas Sorza** — Solidity / Web3 Developer
 
+---
+
+## 📖 Overview
+
+This project implements a simple **ERC20 token and a faucet smart contract** that allows users to claim tokens periodically with a cooldown and a maximum number of claims. Built using **Foundry** and **OpenZeppelin** as part of a Solidity learning and development workflow.
+
+---
+
+## 🗂 Contracts
+
+### `THXToken.sol`
 An **ERC20 token implementation** built on top of OpenZeppelin.
 
-
-### TokenFaucet.sol
-
+### `TokenFaucet.sol`
 A **time-based faucet contract** that distributes ERC20 tokens.
 
-./img/TokenFaucetClass.png
+![TokenFaucet Class Diagram](./img/TokenFaucetClass.png)
+
 ---
 
-# Contract Interaction 
-./img/executionFlow.png
+## 🔄 Contract Interaction
+
+![Execution Flow](./img/executionFlow.png)
+
 ---
 
-# Deployment
+## 🚀 Deployment
 
-Deployment script:
+Deployment script: `script/DeployTHXToken.s.sol`
 
-script/DeployTHXToken.s.sol
-
-## 📜 Deployed Contracts
-
-### Arbitrum Sepolia Testnet
+### 📜 Deployed Contracts — Arbitrum Sepolia Testnet
 
 | Contract | Address |
 |----------|---------|
@@ -48,7 +48,6 @@ script/DeployTHXToken.s.sol
 
 ---
 
-# Testing
+## 🧪 Testing
 
-Tests are will be written in foundry (Not yet implemented).
-
+Tests will be written in Foundry *(not yet implemented)*.
