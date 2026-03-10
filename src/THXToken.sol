@@ -2,17 +2,14 @@
 
 pragma solidity ^0.8.30;
 
-import {ERC-20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol"
+import {ERC20} from "@openzeppelin/contracts/token/ERC20/ERC20.sol";
 
-contract THXToken {
-
-    event Transfer();
-    event Approval();
-    
-    
-    string public _symbol;
-    string public _name;
-    uint256 public _totalSupply;
-    uint8 public decimal; 
-
+contract THXToken is ERC20 {
+    constructor(
+        uint256 totalSupply_,
+        string memory name_,
+        string memory symbol_
+    ) ERC20(name_, symbol_) {
+        _mint(msg.sender, totalSupply_);
+    }
 }
