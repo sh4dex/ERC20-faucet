@@ -79,10 +79,11 @@ contract TokenFaucet {
      * checks the EnoughTokensToTransfer and NoTimeLeft modifiers before allowing the claim
      */
     function claim() public NoTimeLeft EnoughTokensToTransfer NoMaxClaims {
-        bool success = _token.transfer(msg.sender, _dripAmount);
-        require(success, "Transfer Failed!");
+        //fixed reentrancy vulnerability by updating the state before transferring tokens
         _lastClaim[msg.sender] = block.timestamp;
         _timesClaimed[msg.sender]++;
+        bool success = _token.transfer(msg.sender, _dripAmount);
+        require(success, "Transfer Failed!");
         emit tokensClaimed(address(this), msg.sender, _dripAmount);
     }
 
