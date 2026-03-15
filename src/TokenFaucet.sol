@@ -20,6 +20,7 @@ contract TokenFaucet {
     uint256 public _dripAmount;
     uint256 public _cooldown;
     uint256 public constant MAX_CLAIMS = 20;
+    bool internal locked;
 
     mapping(address claimer => uint256 timestamp) _lastClaim;
     mapping(address claimer => uint256 timesClaimed) _timesClaimed;
@@ -39,6 +40,14 @@ contract TokenFaucet {
             revert MaxClaimsReached();
         }
         _;
+    }
+
+    modifier NoReentrancy() {
+        if (!locked) {
+            locked = true;
+            _;
+            locked = false;
+        }
     }
 
     modifier NoTimeLeft() {
@@ -78,7 +87,13 @@ contract TokenFaucet {
      * @dev emits a tokensClaimed event when tokens are claimed,
      * checks the EnoughTokensToTransfer and NoTimeLeft modifiers before allowing the claim
      */
-    function claim() public NoTimeLeft EnoughTokensToTransfer NoMaxClaims {
+    function claim()
+        public
+        NoTimeLeft
+        EnoughTokensToTransfer
+        NoMaxClaims
+        NoReentrancy
+    {
         //fixed reentrancy vulnerability by updating the state before transferring tokens
         _lastClaim[msg.sender] = block.timestamp;
         _timesClaimed[msg.sender]++;
@@ -88,4 +103,5 @@ contract TokenFaucet {
     }
 
     //TODO: Add owner functions
+    //TODO: Add openzeppelin's ReentrancyGuard
 }
