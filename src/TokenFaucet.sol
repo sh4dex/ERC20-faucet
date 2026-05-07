@@ -59,7 +59,7 @@ contract TokenFaucet {
         _;
     }
 
-    function _NoTimeLeft()  internal {
+    function _NoTimeLeft() internal {
         if (block.timestamp - _lastClaim[msg.sender] < _cooldown) {
             revert CooldownNotExpired();
         }
