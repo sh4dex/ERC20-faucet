@@ -82,18 +82,13 @@ contract TokenFaucet {
         _cooldown = cooldown_;
     }
 
-    /**  @notice Allows users to claim tokens from the faucet if they
+    /**
+     * @notice Allows users to claim tokens from the faucet if they
      * have waited for the cooldown period and if the faucet has enough tokens to transfer
      * @dev emits a tokensClaimed event when tokens are claimed,
      * checks the EnoughTokensToTransfer and NoTimeLeft modifiers before allowing the claim
      */
-    function claim()
-        public
-        NoTimeLeft
-        EnoughTokensToTransfer
-        NoMaxClaims
-        NoReentrancy
-    {
+    function claim() public NoTimeLeft EnoughTokensToTransfer NoMaxClaims NoReentrancy {
         //fixed reentrancy vulnerability by updating the state before transferring tokens
         _lastClaim[msg.sender] = block.timestamp;
         _timesClaimed[msg.sender]++;
