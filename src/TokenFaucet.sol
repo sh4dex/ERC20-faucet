@@ -36,10 +36,14 @@ contract TokenFaucet {
     event tokensClaimed(address from, address to, uint256 amount);
 
     modifier NoMaxClaims() {
+        _NoMaxClaims();
+        _;
+    }
+
+    function _NoMaxClaims() internal {
         if (_timesClaimed[msg.sender] >= MAX_CLAIMS) {
             revert MaxClaimsReached();
         }
-        _;
     }
 
     modifier NoReentrancy() {
@@ -51,19 +55,26 @@ contract TokenFaucet {
     }
 
     modifier NoTimeLeft() {
+        _NoTimeLeft();
+        _;
+    }
+
+    function _NoTimeLeft()  internal {
         if (block.timestamp - _lastClaim[msg.sender] < _cooldown) {
             revert CooldownNotExpired();
         }
-        _;
     }
 
     modifier EnoughTokensToTransfer() {
-        if (_token.balanceOf(address(this)) < _dripAmount) {
-            revert NotEnoughTokens();
-        }
+        _EnoughTokensToTransfer();
         _;
     }
 
+    function _EnoughTokensToTransfer() internal {
+        if (_token.balanceOf(address(this)) < _dripAmount) {
+            revert NotEnoughTokens();
+        }
+    }
     error CooldownNotExpired();
     error NotEnoughTokens();
     error MaxClaimsReached();

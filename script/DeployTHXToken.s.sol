@@ -3,7 +3,7 @@
 pragma solidity ^0.8.30;
 
 import {Script} from "forge-std/Script.sol";
-import {console} from "forge-std/Console.sol";
+import {console} from "forge-std/console.sol";
 import {THXToken} from "../src/THXToken.sol";
 import {TokenFaucet} from "../src/TokenFaucet.sol";
 
